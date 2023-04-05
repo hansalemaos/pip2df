@@ -241,7 +241,7 @@ def get_data_from_pipreqs(df):
 
 
 def get_module_imports(
-    df, pyfile=r"C:\ProgramData\anaconda3\envs\adda\call3xxxxxxxxxxx.py"
+    df, pyfile,ignored_packages
 ):
     pyfile = os.path.normpath(pyfile)
 
@@ -322,7 +322,7 @@ def get_module_imports(
             .isin([str(x).strip().lower().replace("_", "-") for x in allpackages])
             & (df["import_level"] == -1)
         ]
-        allpa = allpa.loc[~allpa.package_name.isin(["Ipython", "pip"])]
+        allpa = allpa.loc[~allpa.package_name.isin(ignored_packages)]
 
         df.loc[allpa.index, "import_level"] = co
         co = co + 1
@@ -369,7 +369,7 @@ class ImportFetcher:
 
     def get_imports_from_py_file(self, pyfile):
         path = os.path.normpath(pyfile)
-        _, allimports = get_module_imports(self.df.copy(), pyfile=path)
+        _, allimports = get_module_imports(self.df.copy(), pyfile=path,ignored_packages =self.ignored_packages )
         return allimports
 
     def _formatdf(self):
