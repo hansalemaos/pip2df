@@ -42,7 +42,7 @@ cf = ( # Parsing 150 packages takes around 5 minutes.
     )
     .save_all_modules_dataframe("f:\\saveallimports.pkl") # Since you are probably not installing every day a new package, you can save the parsing results and load them later on
 )
-cf.load_all_modules_dataframe('f:\\saveallimports.pkl') # Save the parsing results 
+cf.load_all_modules_dataframe('f:\\saveallimports.pkl') # Load the parsing results 
 print(cf.df) # Shows all modules in the env 
 fileimports = cf.get_imports_from_py_file(
     r"C:\ProgramData\anaconda3\envs\adda\stra6.py" 
